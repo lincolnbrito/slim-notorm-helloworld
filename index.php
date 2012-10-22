@@ -1,6 +1,5 @@
 <?php 
 	require 'vendor/autoload.php';
-	// include 'vendor/vrana/NotORM/NotORM.php';
 
 	//configuração de conexão com banco de dados
 	$pdo = new PDO('mysql:dbname=slim_helloworld;host:127.0.0.1','root','');
@@ -13,12 +12,10 @@
 	));
 
 
-
 	//criando uma nova Rota
 	$app->get('/', function(){
 		echo "Hello Slim World";
 	});
-
 
 
 	//obtendo todos os livros
@@ -35,7 +32,6 @@
 		$app->response()->header('Content-Type', 'application/json');
 		echo json_encode($books);
 	});
-
 
 
 	//obtendo um livro pelo id
@@ -69,7 +65,6 @@
 		$result = $db->books->insert($book);
 		echo json_enconde(array('id'=>$result['id']));
 	});
-
 
 
 	//editanto um livro
