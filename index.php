@@ -13,8 +13,9 @@
 
 
 	//criando uma nova Rota
-	$app->get('/', function(){
-		echo "Hello Slim World";
+	$app->get('/', function() use($app){
+		$app->render('index.php');
+		//echo "Hello Slim World";
 	});
 
 
