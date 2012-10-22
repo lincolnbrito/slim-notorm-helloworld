@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+			  type: 'GET',
+			  url: "index.php/books",
+			  context: document.body
+			}).done(function(data) { 
+			  $(this).addClass("done");
+			  console.log(data);
+			});
+		})
+	</script>	
+</head>
+<body>
+	
+</body>
+</html>

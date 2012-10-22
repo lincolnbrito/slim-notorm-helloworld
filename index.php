@@ -11,6 +11,8 @@
 		'TEMPLATE.PATH' => './templates'
 	));
 
+	//$app->contentType('text/html; charset=utf-8');
+
 
 	//criando uma nova Rota
 	$app->get('/', function() use($app){
@@ -27,11 +29,13 @@
 				'id' => $book['id'],
 				'title' => $book['title'],
 				'author' => $book['author'],
-				'summary' => $book['summary']
+				'summary' => utf8_encode($book['summary'])
 			);
 		}
-		$app->response()->header('Content-Type', 'application/json');
+		
+		$app->response()->header('Content-Type', 'application/json; charset=UTF-8');
 		echo json_encode($books);
+		//print_r($books);
 	});
 
 
@@ -62,7 +66,7 @@
 	//adicionando um novo livro
 	$app->post('/book', function() use ($app, $db){
 		$app->response()->header('Content-Type', 'application/json');
-		$book = $app->request()->post();
+		$book = utf8_encode($app->request()->post());
 		$result = $db->books->insert($book);
 		echo json_enconde(array('id'=>$result['id']));
 	});
