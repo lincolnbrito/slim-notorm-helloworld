@@ -5,6 +5,6 @@ Instalando as dependências
 --------------------------
 Essa aplicação utiliza o composer  para instalação de bibliotecas de terceiros.  
 Baixe o composer:  
-	curl -s https://getcomposer.org/installer | php  
+    curl -s https://getcomposer.org/installer | php  
 Execute:  
-	php composer.phar install
+    php composer.phar install
