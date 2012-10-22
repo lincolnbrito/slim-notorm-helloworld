@@ -1,0 +1,9 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "vrana/notorm": "dev-master"
+    },
+    "autoload": {
+        "files": ["vendor/vrana/notorm/NotORM.php"]
+	}
+}
