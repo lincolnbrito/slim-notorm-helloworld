@@ -14,6 +14,16 @@
 	//setando o encoding
 	$app->contentType('text/html; charset=utf-8');
 
+	//rota padrão para página não encontrada
+	$app->notFound(function () use ($app) {
+    	$app->response()->header('Content-Type', 'application/json');
+    	echo json_encode(array(
+				'status' => false,
+				'message' => 'The resource doesn\'t exist. Check the API docs'
+		));
+    	//$app->render('404.php');	//template padrão para erro 404
+	});
+
 	//criando uma nova Rota
 	$app->get('/', function() use($app){
 		$app->view()->setData('title', 'Olá Mundo');
