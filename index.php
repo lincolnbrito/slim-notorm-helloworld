@@ -11,15 +11,14 @@
 		'TEMPLATE.PATH' => './templates'
 	));
 
-	//$app->contentType('text/html; charset=utf-8');
-
+	//setando o encoding
+	$app->contentType('text/html; charset=utf-8');
 
 	//criando uma nova Rota
 	$app->get('/', function() use($app){
 		$app->render('index.php');
 		//echo "Hello Slim World";
 	});
-
 
 	//obtendo todos os livros
 	$app->get('/books', function() use ($app, $db){
@@ -33,26 +32,24 @@
 			);
 		}
 		
-		$app->response()->header('Content-Type', 'application/json; charset=UTF-8');
+		$app->response()->header('Content-Type', 'application/json');
 		echo json_encode($books);
-		//print_r($books);
 	});
 
-
 	//obtendo um livro pelo id
-	$app->get('/books/:id', function($id) use ($app,$db){
+	$app->get('/books/:key/:id', function($key, $id) use ($app,$db){
 		//cabeçalho da resposta
 		$app->response()->header('Content-Type', 'aplication/json');
 		//setando o id do livro para busca
-		//$book = $db->books()->where('id', $id);
-		$book = $db->books('id = ?', $id);
+		$book = $db->books()->where('id', $id);
+		//$book = $db->books('id = ?', $id);
 
 		if($data = $book->fetch()){
 			echo json_encode(array(
 				'id' => $data['id'],
 				'title' => $data['title'],
 				'author' => $data['author'],
-				'summary' => $data['summary']
+				'summary' => utf8_encode($data['summary'])
 			));
 		}else{
 			echo json_encode(array(
@@ -62,7 +59,6 @@
 		}
 	});
 
-
 	//adicionando um novo livro
 	$app->post('/book', function() use ($app, $db){
 		$app->response()->header('Content-Type', 'application/json');
@@ -70,7 +66,6 @@
 		$result = $db->books->insert($book);
 		echo json_enconde(array('id'=>$result['id']));
 	});
-
 
 	//editanto um livro
 	$app->put('/books/:id', function($id) use($app, $db){
