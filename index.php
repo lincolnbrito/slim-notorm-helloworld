@@ -16,6 +16,7 @@
 
 	//criando uma nova Rota
 	$app->get('/', function() use($app){
+		$app->view()->setData('title', 'Olá Mundo');
 		$app->render('index.php');
 		//echo "Hello Slim World";
 	});
